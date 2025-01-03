@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Change this to your database provider
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id             Int       @id @default(autoincrement())
+  username       String    @unique
+  email          String    @unique
+  password       String
+  bio            String?
+  fitness_goals  String?
+  date_of_birth  DateTime?
+  height         Float?
+  weight         Float?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+  is_admin       Boolean   @default(false)
+  Workouts       workout[]
+  Progress       progress[]
+  Friends        friends[] @relation("UserFriends")
+  FriendsOf      friends[] @relation("FriendUsers")
+  Newsfeed       newsfeed[]
+  CommunityPosts community_posts[]
+}
+
+model workout {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  title      String
+  date       DateTime
+  duration   Int
+  notes      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  user       users     @relation(fields: [user_id], references: [id])
+  Exercises  workout_exercises[]
+}
+
+model exercises {
+  id          Int                 @id @default(autoincrement())
+  name        String              @unique
+  description String?
+  muscle_group String?
+  is_custom   Boolean             @default(false)
+  Workouts    workout_exercises[]
+}
+
+model workout_exercises {
+  id          Int      @id @default(autoincrement())
+  workout_id  Int
+  exercise_id Int
+  sets        Int?
+  reps        Int?
+  distance    Int?
+  duration    Int?
+  weight      Float?
+  workout     workout   @relation(fields: [workout_id], references: [id])
+  exercise    exercises @relation(fields: [exercise_id], references: [id])
+}
+
+model progress {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  date            DateTime
+  weight          Float
+  personal_records Json
+  user            users    @relation(fields: [user_id], references: [id])
+}
+
+model friends {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  friend_id  Int
+  status     FriendsStatus
+  created_at DateTime @default(now())
+  user       users    @relation("UserFriends", fields: [user_id], references: [id])
+  friend     users    @relation("FriendUsers", fields: [friend_id], references: [id])
+}
+
+model newsfeed {
+  id           Int           @id @default(autoincrement())
+  user_id      Int
+  activity_type NewsfeedType
+  activity_data Json
+  created_at   DateTime @default(now())
+  user         users    @relation(fields: [user_id], references: [id])
+}
+
+model community_posts {
+  id         Int           @id @default(autoincrement())
+  user_id    Int
+  content    String
+  post_type  PostType
+  likes      Int           @default(0)
+  created_at DateTime      @default(now())
+  user       users         @relation(fields: [user_id], references: [id])
+}
+
+enum FriendsStatus {
+  Pending
+  Accepted
+  Blocked
+}
+
+enum NewsfeedType {
+  Workout
+  PR
+  Milestone
+}
+
+enum PostType {
+  Tip
+  Plan
+  Q_A
+}
