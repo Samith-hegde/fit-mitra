@@ -37,6 +37,7 @@ model workout {
   notes      String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  isTemplated Boolean @default(false)
   user       users     @relation(fields: [user_id], references: [id])
   Exercises  workout_exercises[]
 }
