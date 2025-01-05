@@ -13,7 +13,6 @@ router.use('/auth', authRouter);
 router.use('/dashboard', dashboardRouter);
 router.use('/user', userRouter);
 router.use('/workout', workoutRouter);
-router.use('/new-post', newPostRouter);
 router.use('/exercises', exercisesRouter);
 router.use('/social', socialRouter);
 
