@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const prisma = require('./config/prismaClient');
+//const prisma = require('./config/prismaClient');
 require('dotenv').config();
 
 const app = express();

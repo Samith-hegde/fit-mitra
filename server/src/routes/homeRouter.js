@@ -5,7 +5,6 @@ const authRouter = require('./authRouter');
 const dashboardRouter = require('./dashboardRouter');
 const userRouter = require('./userRouter');
 const workoutRouter = require('./workoutRouter');
-const newPostRouter = require('./newPostRouter');
 const exercisesRouter = require('./exercisesRouter');
 const socialRouter = require('./socialRouter');
 
