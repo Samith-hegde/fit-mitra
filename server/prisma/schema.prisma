@@ -20,12 +20,12 @@ model users {
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt
   is_admin       Boolean   @default(false)
-  Workouts       workout[]
-  Progress       progress[]
+  Workouts       workout[] @relation(onDelete: Cascade)
+  Progress       progress[] @relation(onDelete: Cascade)
   Friends        friends[] @relation("UserFriends")
   FriendsOf      friends[] @relation("FriendUsers")
   Newsfeed       newsfeed[]
-  CommunityPosts community_posts[]
+  CommunityPosts community_posts[] @relation(onDelete: SetNull)
 }
 
 model workout {
@@ -38,7 +38,7 @@ model workout {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   isTemplated Boolean @default(false)
-  user       users     @relation(fields: [user_id], references: [id])
+  user       users     @relation(fields: [user_id], references: [id], onDelete: CASCADE)
   Exercises  workout_exercises[]
 }
 
@@ -70,7 +70,7 @@ model progress {
   date            DateTime
   weight          Float
   personal_records Json
-  user            users    @relation(fields: [user_id], references: [id])
+  user            users    @relation(fields: [user_id], references: [id], onDelete: CASCADE)
 }
 
 model friends {
@@ -95,11 +95,12 @@ model newsfeed {
 model community_posts {
   id         Int           @id @default(autoincrement())
   user_id    Int
+  title      String
   content    String
   post_type  PostType
   likes      Int           @default(0)
   created_at DateTime      @default(now())
-  user       users         @relation(fields: [user_id], references: [id])
+  user       users?        @relation(fields: [user_id], references: [id], onDelete: SetNull)
 }
 
 enum FriendsStatus {
