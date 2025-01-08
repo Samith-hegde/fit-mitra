@@ -34,9 +34,14 @@ const getWorkoutById = async (req, res) => {
         res.status(500).json({ error: error.message });
 }};
 
-const getAllWorkouts = async (req, res) => {
+const getAllWorkoutsforUserId = async (req, res) => {
     try {
-        const workouts = await prisma.workout.findMany();
+        const { user_id } = req.params;
+        const workouts = await prisma.workout.findMany({
+            where: {
+                user_id: parseInt(user_id),
+            },
+            });
         res.json(workouts);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -123,7 +128,7 @@ const deleteWorkout = async (req, res) => {
 
 module.exports = {
     getWorkoutById,
-    getAllWorkouts,
+    getAllWorkoutsforUserId,
     createWorkout,
     updateWorkout,
     deleteWorkout,
