@@ -10,6 +10,7 @@ const sendFriendRequest = async (req, res) => {
                 status: 'Pending', 
             }
         });
+
         res.json(friendRequest);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -111,3 +112,97 @@ const blockUser = async (req, res) => {
         res.status(500).json({ error: 'An error occurred', details: error.message });
     }    
 }
+
+const getFriends = async (req, res, status) => {
+    const { userId } = req.params;
+    try {
+        const friends = await prisma.friends.findMany({
+            where: {
+                userId: parseInt(userId),
+                status: status,
+            },
+            include: {
+                friend: {
+                    select: {
+                        id: true,
+                        username: true,
+                        email: true,
+                    }
+                }
+            }
+        });
+        res.json(friends);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const getFriendsforUser = async (req, res) => {
+    getFriends(req, res, 'Accepted');
+}
+
+const getBlockedUsers = async (req, res) => {
+    getFriends(req, res, 'Blocked');
+}
+
+const getAwaitingResponse = async (req, res) => {
+    getFriends(req, res, 'Pending');
+}
+
+const getPendingFriendRequests = async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const friends = await prisma.friends.findMany({
+            where: {
+                friendId: parseInt(userId),
+                status: 'Pending',
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        username: true,
+                        email: true,
+                    }
+                }
+            }
+        });
+        res.json(friends);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const unfriend = async (req, res) => {
+    const { userId, friendId } = req.body;
+    try {
+        const unfriend = await prisma.friends.$transaction({
+            deleteMany: {
+                where: {
+                    userId: parseInt(userId),
+                    friendId: parseInt(friendId),
+                },
+            },
+            deleteMany: {
+                where: {
+                    userId: parseInt(friendId),
+                    friendId: parseInt(userId),
+                },
+            },
+        });
+        res.json(unfriend);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = {
+    sendFriendRequest,
+    acceptFriendRequest,
+    blockUser,
+    getFriendsforUser,
+    getBlockedUsers,
+    getAwaitingResponse,
+    getPendingFriendRequests,
+    unfriend,
+};
