@@ -1,15 +1,5 @@
 const exerciseQueries = require('../queries/exerciseService');
 
-const getExerciseById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const exercise = await exerciseQueries.findExerciseById(id);
-    res.json(exercise);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const getAllExercises = async (req, res) => {
   try {
     const exercises = await exerciseQueries.findAllExercises();
@@ -49,7 +39,6 @@ const deleteExercise = async (req, res) => {
 };
 
 module.exports = {
-  getExerciseById,
   getAllExercises,
   createExercise,
   updateExercise,
