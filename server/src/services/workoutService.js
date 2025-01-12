@@ -12,8 +12,6 @@ const findWorkoutById = async (id) => {
           distance: true,
           duration: true,
           weight: true,
-        },
-        include: {
           exercise: {
             select: {
               name: true,
@@ -33,13 +31,14 @@ const findAllWorkoutsByUserId = async (user_id) => {
   });
 };
 
-const createNewWorkout = async (workoutData) => {
+const createNewWorkout = async (user_id, workoutData) => {
   return await prisma.workout.create({
     data: {
       ...workoutData,
       Exercises: {
         create: workoutData.Exercises,
       },
+      user_id: parseInt(user_id),
     },
   });
 };
@@ -61,7 +60,7 @@ const saveWorkoutAsTemplate = async (id, workoutData) => {
         where: { id: parseInt(id) },
         data: {
         ...workoutData,
-        is_template: true,
+        isTemplated: true,
         },
     });
 };

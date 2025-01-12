@@ -5,9 +5,9 @@ const { getWorkout, getAllWorkouts, createWorkout, updateWorkout, templateWorkou
 
 router.get('/getAllWorkouts', getAllWorkouts);
 router.get('/getWorkout/:id', getWorkout);
-router.post('/create', createWorkout);
-router.post('/template', templateWorkout);
-router.put('/:id', updateWorkout);
-router.delete('/:id', deleteWorkout);
+router.post('/createWorkout', createWorkout);
+router.put('/templateWorkout/:id', templateWorkout);
+router.put('/updateWorkout/:id', updateWorkout);
+router.delete('/deleteWorkout/:id', deleteWorkout);
 
 module.exports = router;
