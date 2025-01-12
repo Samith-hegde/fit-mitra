@@ -116,7 +116,7 @@ enum NewsfeedType {
 }
 
 enum PostType {
-  Tip
-  Plan
-  Q_A
+  Tips
+  Workout 
+  Progress
 }
