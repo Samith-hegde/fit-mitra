@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
-//const prisma = require('./config/prismaClient');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const app = express();
 
@@ -11,7 +10,7 @@ const homeRouter = require('./routes/homeRouter');
 
 app.use('/api', homeRouter);
 
-const PORT = process.env.BACKEND_PORT || 5000;
+const PORT = process.env.BACKEND_PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
