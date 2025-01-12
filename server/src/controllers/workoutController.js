@@ -11,7 +11,7 @@ const getWorkout = async (req, res) => {
 };
 
 const getAllWorkouts = async (req, res) => {
-  const { user_id } = req.params;
+  const { user_id } = req.query.params;
   try {
     const workouts = await workoutQueries.findAllWorkoutsByUserId(user_id);
     res.json(workouts);

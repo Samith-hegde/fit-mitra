@@ -3,20 +3,28 @@ const prisma = require('../../config/prismaClient');
 const findUserById = async (id) => {
   return await prisma.users.findUnique({
     where: { id: parseInt(id) },
-    exclude: { password: true },
-    include: {
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      bio: true,
+      fitness_goals: true,
+      date_of_birth: true,
+      height: true,
+      weight: true,
+      created_at: true,
+      updated_at: true,
+      is_admin: true,
       Friends: {
         select: {
           id: true,
           friend_id: true,
-          username: true,
         },
       },
       CommunityPosts: {
         select: {
           id: true,
           title: true,
-          content: true,
           post_type: true,
           likes: true,
           created_at: true,

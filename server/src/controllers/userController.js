@@ -1,7 +1,9 @@
 const userQueries = require('../services/userService');
 
 const getUserById = async (req, res) => {
+  console.log('Request Params:', req.params);
   const { id } = req.params;
+  console.log('ID:', id);
   try {
     const user = await userQueries.findUserById(id);
     res.json(user);
@@ -31,6 +33,7 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id } = req.params;
   try {
+    console.log('Request Body:', req.body);
     const updatedUser = await userQueries.updateExistingUser(id, req.body);
     res.json(updatedUser);
   } catch (error) {
