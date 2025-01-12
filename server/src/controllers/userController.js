@@ -1,4 +1,4 @@
-const userQueries = require('../queries/userQueries');
+const userQueries = require('../queries/userService');
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
