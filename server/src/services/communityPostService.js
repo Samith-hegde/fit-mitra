@@ -83,29 +83,6 @@ const getAllCommunityPosts = async (req, res) => {
     }
 }
 
-const getCommunityPostsOfUser = async (req, res) => {
-    const { user_id } = req.params;
-    try {
-        const posts = await prisma.community_posts.findMany({
-            where: {
-                user_id: parseInt(user_id),
-            },
-            include: {
-                user: {
-                    select: {
-                        id: true,
-                        username: true,
-                        email: true,
-                    }
-                }
-            }
-        });
-        res.json(posts);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}
-
 const getSocialsFeed = async (req, res) => {
     const { user_id } = req.params;
     try {

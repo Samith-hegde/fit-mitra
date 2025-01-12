@@ -8,7 +8,7 @@ const workoutRouter = require('./workoutRouter');
 const exercisesRouter = require('./exercisesRouter');
 const socialRouter = require('./socialRouter');
 
-router.use('/auth', authRouter);
+router.use('/', authRouter);
 router.use('/dashboard', dashboardRouter);
 router.use('/user', userRouter);
 router.use('/workout', workoutRouter);
