@@ -1,4 +1,4 @@
-const exerciseQueries = require('../queries/exerciseService');
+const exerciseQueries = require('../services/exerciseService');
 
 const getAllExercises = async (req, res) => {
   try {

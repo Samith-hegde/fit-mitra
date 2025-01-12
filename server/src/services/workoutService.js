@@ -56,6 +56,16 @@ const updateExistingWorkout = async (id, workoutData) => {
   });
 };
 
+const saveWorkoutAsTemplate = async (id, workoutData) => {
+    return await prisma.workout.update({
+        where: { id: parseInt(id) },
+        data: {
+        ...workoutData,
+        is_template: true,
+        },
+    });
+};
+
 const deleteWorkoutById = async (id) => {
   return await prisma.workout.delete({
     where: { id: parseInt(id) },
@@ -67,5 +77,6 @@ module.exports = {
   findAllWorkoutsByUserId,
   createNewWorkout,
   updateExistingWorkout,
+  saveWorkoutAsTemplate,
   deleteWorkoutById,
 };

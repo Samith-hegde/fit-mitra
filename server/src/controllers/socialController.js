@@ -1,6 +1,6 @@
-const communityPostQueries = require('../queries/communityPostService');
+const communityPostQueries = require('../services/communityPostService');
 
-const createCommunityPost = async (req, res) => {
+const createSocial = async (req, res) => {
   try {
     const newPost = await communityPostQueries.createPost(req.body);
     res.json(newPost);
@@ -9,7 +9,7 @@ const createCommunityPost = async (req, res) => {
   }
 };
 
-const updateCommunityPost = async (req, res) => {
+const updateSocial = async (req, res) => {
   const { id } = req.params;
   try {
     const updatedPost = await communityPostQueries.updatePost(id, req.body);
@@ -19,7 +19,7 @@ const updateCommunityPost = async (req, res) => {
   }
 };
 
-const deleteCommunityPost = async (req, res) => {
+const deleteSocial = async (req, res) => {
   const { id } = req.params;
   try {
     const deletedPost = await communityPostQueries.deletePost(id);
@@ -29,16 +29,7 @@ const deleteCommunityPost = async (req, res) => {
   }
 };
 
-const getAllCommunityPosts = async (req, res) => {
-  try {
-    const posts = await communityPostQueries.findAllPosts();
-    res.json(posts);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-const getCommunityPostById = async (req, res) => {
+const getSocialById = async (req, res) => {
   const { id } = req.params;
   try {
     const post = await communityPostQueries.findPostById(id);
@@ -58,7 +49,7 @@ const getSocialsFeed = async (req, res) => {
   }
 };
 
-const likeCommunityPost = async (req, res) => {
+const likeSocial = async (req, res) => {
   const { id } = req.params;
   try {
     const likedPost = await communityPostQueries.likePost(id);
@@ -68,7 +59,7 @@ const likeCommunityPost = async (req, res) => {
   }
 };
 
-const unlikeCommunityPost = async (req, res) => {
+const unlikeSocial = async (req, res) => {
   const { id } = req.params;
   try {
     const unlikedPost = await communityPostQueries.unlikePost(id);
@@ -79,12 +70,11 @@ const unlikeCommunityPost = async (req, res) => {
 };
 
 module.exports = {
-  createCommunityPost,
-  updateCommunityPost,
-  deleteCommunityPost,
-  getAllCommunityPosts,
-  getCommunityPostById,
+  createSocial,
+  updateSocial,
+  deleteSocial,
+  getSocialById,
   getSocialsFeed,
-  likeCommunityPost,
-  unlikeCommunityPost,
+  likeSocial,
+  unlikeSocial,
 };

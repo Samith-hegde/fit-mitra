@@ -22,20 +22,6 @@ const deletePost = async (id) => {
   });
 };
 
-const findAllPosts = async () => {
-  return await prisma.community_posts.findMany({
-    include: {
-      user: {
-        select: {
-          id: true,
-          username: true,
-          email: true,
-        },
-      },
-    },
-  });
-};
-
 const findPostById = async (id) => {
   return await prisma.community_posts.findUnique({
     where: { id: parseInt(id) },
@@ -52,6 +38,25 @@ const findPostById = async (id) => {
 };
 
 const findSocialFeed = async (user_id) => {
+  const is_admin = await prisma.users.findUnique({
+    where: { id: parseInt(user_id) },
+    select: { is_admin: true },
+  });
+
+  if (is_admin.is_admin) {
+    return await prisma.community_posts.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            email: true,
+          },
+        },
+      },
+    });
+  }
+  
   return await prisma.community_posts.findMany({
     where: {
       user_id: { not: parseInt(user_id) },
@@ -90,7 +95,6 @@ module.exports = {
   createPost,
   updatePost,
   deletePost,
-  findAllPosts,
   findPostById,
   findSocialFeed,
   likePost,

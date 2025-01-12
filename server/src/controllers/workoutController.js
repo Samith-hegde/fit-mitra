@@ -1,6 +1,6 @@
-const workoutQueries = require('../queries/workoutService');
+const workoutQueries = require('../services/workoutService');
 
-const getWorkoutById = async (req, res) => {
+const getWorkout = async (req, res) => {
   const { id } = req.params;
   try {
     const workout = await workoutQueries.findWorkoutById(id);
@@ -10,7 +10,7 @@ const getWorkoutById = async (req, res) => {
   }
 };
 
-const getAllWorkoutsforUserId = async (req, res) => {
+const getAllWorkouts = async (req, res) => {
   const { user_id } = req.params;
   try {
     const workouts = await workoutQueries.findAllWorkoutsByUserId(user_id);
@@ -39,6 +39,16 @@ const updateWorkout = async (req, res) => {
   }
 };
 
+const templateWorkout = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const templateWorkout = await workoutQueries.saveWorkoutAsTemplate(id, req.body);
+        res.json(templateWorkout);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 const deleteWorkout = async (req, res) => {
   const { id } = req.params;
   try {
@@ -50,9 +60,10 @@ const deleteWorkout = async (req, res) => {
 };
 
 module.exports = {
-  getWorkoutById,
-  getAllWorkoutsforUserId,
+  getWorkout,
+  getAllWorkouts,
   createWorkout,
   updateWorkout,
+  templateWorkout,
   deleteWorkout,
 };
