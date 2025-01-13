@@ -1,4 +1,5 @@
 const prisma = require('../../config/prismaClient');
+const communityPostQueries = require('./communityPostService');
 
 const findWorkoutById = async (id) => {
   return await prisma.workout.findUnique({
@@ -32,6 +33,19 @@ const findAllWorkoutsByUserId = async (user_id) => {
 };
 
 const createNewWorkout = async (user_id, workoutData) => {
+  if(workoutData.uploadAsPost) {
+    const postData = {
+      user_id: user_id,
+      title: workoutData.title,
+      caption: workoutData.postCaption,
+      post_type: 'Workout',
+      content: JSON.stringify(workoutData.Exercises),
+    }
+    await communityPostQueries.createPost({
+      ...postData
+    })    
+  }
+
   return await prisma.workout.create({
     data: {
       ...workoutData,

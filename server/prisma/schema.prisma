@@ -37,6 +37,8 @@ model workout {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   isTemplated Boolean @default(false)
+  uploadAsPost Boolean @default(false)
+  postCaption String?
   user       users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Exercises  workout_exercises[]
 }
@@ -69,6 +71,7 @@ model progress {
   date            DateTime
   weight          Float
   personal_records Json
+  uploadAsPost    Boolean @default(false)
   user            users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
@@ -86,7 +89,8 @@ model community_posts {
   id         Int           @id @default(autoincrement())
   user_id    Int
   title      String
-  content    String
+  caption    String?
+  content    Json
   post_type  PostType
   likes      Int           @default(0)
   created_at DateTime      @default(now())
