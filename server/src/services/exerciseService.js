@@ -1,30 +1,30 @@
 const prisma = require('../../config/prismaClient');
 
 const findExerciseById = async (id) => {
-  return await prisma.exercise.findUnique({
+  return await prisma.exercises.findUnique({
     where: { id: parseInt(id) },
   });
 };
 
 const findAllExercises = async () => {
-  return await prisma.exercise.findMany();
+  return await prisma.exercises.findMany();
 };
 
 const createNewExercise = async (exerciseData) => {
-  return await prisma.exercise.create({
+  return await prisma.exercises.create({
     data: exerciseData,
   });
 };
 
 const updateExistingExercise = async (id, exerciseData) => {
-  return await prisma.exercise.update({
+  return await prisma.exercises.update({
     where: { id: parseInt(id) },
     data: exerciseData,
   });
 };
 
 const deleteExerciseById = async (id) => {
-  return await prisma.exercise.delete({
+  return await prisma.exercises.delete({
     where: { id: parseInt(id) },
   });
 };

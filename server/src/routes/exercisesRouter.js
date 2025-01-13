@@ -3,9 +3,9 @@ const router = express.Router();
 
 const { getAllExercises, createExercise, updateExercise, deleteExercise } = require('../controllers/exerciseController');
 
-router.get('/', getAllExercises);
-router.post('/create', createExercise);
-router.put('/:id', updateExercise);
-router.delete('/:id', deleteExercise);
+router.get('/getAllExercises', getAllExercises);
+router.post('/createExercise', createExercise);
+router.put('/updateExercise/:id', updateExercise);
+router.delete('/deleteExercise/:id', deleteExercise);
 
 module.exports = router;

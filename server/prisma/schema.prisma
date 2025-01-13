@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" // Change this to your database provider
+  provider = "postgresql" 
   url      = env("DATABASE_URL")
 }
 
@@ -18,14 +18,13 @@ model users {
   height         Float?
   weight         Float?
   created_at     DateTime  @default(now())
-  updated_at     DateTime  @updatedAt
+  updated_at     DateTime?  @updatedAt
   is_admin       Boolean   @default(false)
-  Workouts       workout[] @relation(onDelete: Cascade)
-  Progress       progress[] @relation(onDelete: Cascade)
+  Workouts       workout[]
+  Progress       progress[]
   Friends        friends[] @relation("UserFriends")
   FriendsOf      friends[] @relation("FriendUsers")
-  Newsfeed       newsfeed[]
-  CommunityPosts community_posts[] @relation(onDelete: SetNull)
+  CommunityPosts community_posts[]
 }
 
 model workout {
@@ -38,7 +37,7 @@ model workout {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   isTemplated Boolean @default(false)
-  user       users     @relation(fields: [user_id], references: [id], onDelete: CASCADE)
+  user       users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   Exercises  workout_exercises[]
 }
 
@@ -70,7 +69,7 @@ model progress {
   date            DateTime
   weight          Float
   personal_records Json
-  user            users    @relation(fields: [user_id], references: [id], onDelete: CASCADE)
+  user            users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model friends {
@@ -81,15 +80,6 @@ model friends {
   created_at DateTime @default(now())
   user       users    @relation("UserFriends", fields: [user_id], references: [id])
   friend     users    @relation("FriendUsers", fields: [friend_id], references: [id])
-}
-
-model newsfeed {
-  id           Int           @id @default(autoincrement())
-  user_id      Int
-  activity_type NewsfeedType
-  activity_data Json
-  created_at   DateTime @default(now())
-  user         users    @relation(fields: [user_id], references: [id])
 }
 
 model community_posts {
@@ -107,12 +97,6 @@ enum FriendsStatus {
   Pending
   Accepted
   Blocked
-}
-
-enum NewsfeedType {
-  Workout
-  PR
-  Milestone
 }
 
 enum PostType {
