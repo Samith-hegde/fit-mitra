@@ -58,6 +58,19 @@ const createNewWorkout = async (user_id, workoutData) => {
 };
 
 const updateExistingWorkout = async (id, workoutData) => {
+  if(workoutData.uploadAsPost) {
+    const postData = {
+      id: id,
+      title: workoutData.title,
+      caption: workoutData.postCaption,
+      post_type: 'Workout',
+      content: JSON.stringify(workoutData.Exercises),
+    }
+    await communityPostQueries.createPost({
+      ...postData
+    })    
+  }
+
   return await prisma.workout.update({
     where: { id: parseInt(id) },
     data: {

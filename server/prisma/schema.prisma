@@ -71,7 +71,8 @@ model progress {
   date            DateTime
   weight          Float
   personal_records Json
-  uploadAsPost    Boolean @default(false)
+  uploadAsPost Boolean @default(false)
+  postCaption String?
   user            users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
