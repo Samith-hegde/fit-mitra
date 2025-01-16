@@ -21,15 +21,6 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  try {
-    const newUser = await userQueries.createNewUser(req.body);
-    res.json(newUser);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const updateUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -54,7 +45,6 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
-  createUser,
   updateUser,
   deleteUser,
 };

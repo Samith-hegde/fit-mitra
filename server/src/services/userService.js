@@ -38,10 +38,6 @@ const findAllUsers = async () => {
   return await prisma.users.findMany();
 };
 
-const createNewUser = async (userData) => {
-  return await prisma.users.create({ data: userData });
-};
-
 const updateExistingUser = async (id, userData) => {
   return await prisma.users.update({
     where: { id: parseInt(id) },
@@ -58,7 +54,6 @@ const deleteUserById = async (id) => {
 module.exports = {
   findUserById,
   findAllUsers,
-  createNewUser,
   updateExistingUser,
   deleteUserById,
 };

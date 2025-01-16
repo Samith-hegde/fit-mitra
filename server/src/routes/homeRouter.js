@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authenticateToken = require('../middlewares/authMiddleware');
 
 const authRouter = require('./authRouter');
 const userRouter = require('./userRouter');
@@ -10,11 +11,11 @@ const friendsRouter = require('./friendsRouter');
 const progressRouter = require('./progressRouter');
 
 router.use('/auth', authRouter);
-router.use('/users', userRouter);
-router.use('/workout', workoutRouter);
-router.use('/exercises', exercisesRouter);
-router.use('/social', socialRouter);
-router.use('/friends', friendsRouter);
-router.use('/progress', progressRouter);
+router.use('/users', authenticateToken, userRouter);
+router.use('/workout', authenticateToken, workoutRouter);
+router.use('/exercises', authenticateToken, exercisesRouter);
+router.use('/social', authenticateToken, socialRouter);
+router.use('/friends', authenticateToken, friendsRouter);
+router.use('/progress', authenticateToken, progressRouter);
 
 module.exports = router;
