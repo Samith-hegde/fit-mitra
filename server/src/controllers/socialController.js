@@ -40,7 +40,7 @@ const getSocialById = async (req, res) => {
 };
 
 const getSocialsFeed = async (req, res) => {
-  const { user_id } = req.body;
+  const { user_id } = req.query;
   try {
     const posts = await communityPostQueries.findSocialFeed(user_id);
     res.json(posts);

@@ -2,10 +2,7 @@ const prisma = require('../../config/prismaClient');
 
 const createPost = async (postData) => {
   return await prisma.community_posts.create({
-    data: {
-      ...postData,
-      user_id: parseInt(postData.user_id),
-    },
+    data: postData,
   });
 };
 
@@ -43,7 +40,7 @@ const findSocialFeed = async (user_id) => {
     select: { is_admin: true },
   });
 
-  if (is_admin.is_admin) {
+  if (is_admin && is_admin.is_admin) {
     return await prisma.community_posts.findMany({
       include: {
         user: {

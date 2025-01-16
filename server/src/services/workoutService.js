@@ -58,17 +58,17 @@ const createNewWorkout = async (user_id, workoutData) => {
 };
 
 const updateExistingWorkout = async (id, workoutData) => {
-  if(workoutData.uploadAsPost) {
+  const fullWorkoutData = await findWorkoutById(id);
+
+  if(!fullWorkoutData.uploadAsPost && workoutData.uploadAsPost) {
     const postData = {
-      id: id,
-      title: workoutData.title,
-      caption: workoutData.postCaption,
+      user_id: fullWorkoutData.user_id,
+      title: workoutData.title || fullWorkoutData.title,
+      caption: workoutData.postCaption || fullWorkoutData.caption,
       post_type: 'Workout',
-      content: JSON.stringify(workoutData.Exercises),
+      content: JSON.stringify(workoutData.Exercises || fullWorkoutData.Exercises),
     }
-    await communityPostQueries.createPost({
-      ...postData
-    })    
+    await communityPostQueries.createPost(postData)    
   }
 
   return await prisma.workout.update({
@@ -76,6 +76,7 @@ const updateExistingWorkout = async (id, workoutData) => {
     data: {
       ...workoutData,
       Exercises: {
+        deleteMany: {},
         create: workoutData.Exercises,
       },
     },

@@ -15,6 +15,6 @@ router.use('/workout', workoutRouter);
 router.use('/exercises', exercisesRouter);
 router.use('/social', socialRouter);
 router.use('/friends', friendsRouter);
-router.ues('/progress', progressRouter);
+router.use('/progress', progressRouter);
 
 module.exports = router;

@@ -16,3 +16,5 @@ router.get('/getProgressRecord/:id', getProgressRecordById);
 router.post('/createProgress', createProgressRecord);
 router.put('/updateProgress/:id', updateProgressRecord);
 router.delete('/deleteProgress/:id', deleteProgressRecord);
+
+module.exports = router;

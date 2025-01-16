@@ -1,4 +1,4 @@
-const progressQueries = require('../queries/progressQueries');
+const progressQueries = require('../services/progressService');
 
 const getProgressByUserId = async (req, res) => {
     const { userId } = req.params;

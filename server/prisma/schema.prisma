@@ -95,7 +95,7 @@ model community_posts {
   post_type  PostType
   likes      Int           @default(0)
   created_at DateTime      @default(now())
-  user       users?        @relation(fields: [user_id], references: [id], onDelete: SetNull)
+  user       users         @relation(fields: [user_id], references: [id], onDelete: SetNull)
 }
 
 enum FriendsStatus {

@@ -1,4 +1,4 @@
-const friendQueries = require('../queries/friendQueries');
+const friendQueries = require('../services/friendService');
 
 const sendFriendRequest = async (req, res) => {
     const { userId, friendId } = req.body;
