@@ -1,8 +1,19 @@
 const communityPostQueries = require('../services/communityPostService');
 
+const getAllSocialsOfUser = async (req, res) => {
+  try {
+    const { user_id } = req.query;
+    const posts = await communityPostQueries.findAllPostsByUserId(user_id);
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const createSocial = async (req, res) => {
   try {
-    const newPost = await communityPostQueries.createPost(req.body);
+    const { user_id } = req.query;
+    const newPost = await communityPostQueries.createPost(user_id, req.body);
     res.json(newPost);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -70,6 +81,7 @@ const unlikeSocial = async (req, res) => {
 };
 
 module.exports = {
+  getAllSocialsOfUser,
   createSocial,
   updateSocial,
   deleteSocial,

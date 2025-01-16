@@ -1,8 +1,17 @@
 const prisma = require('../../config/prismaClient');
 
-const createPost = async (postData) => {
+const findAllPostsByUserId = async (user_id) => {
+  return await prisma.community_posts.findMany({
+    where: { user_id: parseInt(user_id) },
+  });
+};
+
+const createPost = async (user_id, postData) => {
   return await prisma.community_posts.create({
-    data: postData,
+    data: {
+      ...postData,
+      user_id: parseInt(user_id),
+    },
   });
 };
 
@@ -89,6 +98,7 @@ const unlikePost = async (id) => {
 };
 
 module.exports = {
+  findAllPostsByUserId,
   createPost,
   updatePost,
   deletePost,
