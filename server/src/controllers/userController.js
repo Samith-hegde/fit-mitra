@@ -1,7 +1,6 @@
 const userQueries = require('../services/userService');
 
 const getUserById = async (req, res) => {
-  console.log('Request Params:', req.params);
   const { id } = req.params;
   console.log('ID:', id);
   try {

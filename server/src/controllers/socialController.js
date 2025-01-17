@@ -2,7 +2,7 @@ const communityPostQueries = require('../services/communityPostService');
 
 const getAllSocialsOfUser = async (req, res) => {
   try {
-    const { user_id } = req.query;
+    const user_id = req.user.user_id;
     const posts = await communityPostQueries.findAllPostsByUserId(user_id);
     res.json(posts);
   } catch (error) {
@@ -12,7 +12,7 @@ const getAllSocialsOfUser = async (req, res) => {
 
 const createSocial = async (req, res) => {
   try {
-    const { user_id } = req.query;
+    const user_id = req.user.user_id;
     const newPost = await communityPostQueries.createPost(user_id, req.body);
     res.json(newPost);
   } catch (error) {
@@ -51,7 +51,7 @@ const getSocialById = async (req, res) => {
 };
 
 const getSocialsFeed = async (req, res) => {
-  const { user_id } = req.query;
+  const user_id = req.user.user_id;
   try {
     const posts = await communityPostQueries.findSocialFeed(user_id);
     res.json(posts);
