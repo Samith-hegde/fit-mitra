@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { login } from './services/authService';
 
 function App() {
   const [data, setData] = useState(null);
@@ -14,6 +15,15 @@ function App() {
     fetchData();
   }, []);
 
+  const handleLogin =  async () => {
+    try {
+      const response = await login({ email: 'samith@gmail.com', password: 'samith', username: 'samith' });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <h1>FitMitra: Your Fitness Companion</h1>
@@ -25,6 +35,7 @@ function App() {
           ))}
         </ul>
       </div>
+      <button onClick={handleLogin}>Login</button>;
     </>
   )
 }
