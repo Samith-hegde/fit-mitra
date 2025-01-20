@@ -21,7 +21,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
     console.log('Request Body:', req.body);
     const updatedUser = await userQueries.updateExistingUser(id, req.body);
@@ -32,7 +32,7 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
     await userQueries.deleteUserById(id);
     res.json({ message: 'User deleted' });

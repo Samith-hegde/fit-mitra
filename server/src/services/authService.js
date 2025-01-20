@@ -7,9 +7,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 const register = async (userData) => {
     const { 
-        email, 
+        username, 
         password, 
-        username,
+        email,
         bio,
         fitness_goals,  
         date_of_birth, 
@@ -20,9 +20,9 @@ const register = async (userData) => {
 
     const user = await prisma.users.create({
         data: {
-        email,
-        password: hashedPassword,
         username,
+        password: hashedPassword,
+        email,
         bio,
         fitness_goals,  
         date_of_birth, 
