@@ -14,7 +14,7 @@ model users {
   password       String
   bio            String?
   fitness_goals  String?
-  date_of_birth  DateTime?
+  date_of_birth  DateTime? @db.Date
   height         Float?
   weight         Float?
   created_at     DateTime  @default(now())
