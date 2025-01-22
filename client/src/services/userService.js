@@ -36,13 +36,4 @@ const deleteUser = async () => {
     }
 }
 
-const getProfile = async () => {
-    try {
-        const response = await api.get('/users/getProfile');
-        return response.data;
-    } catch (error) {
-        return Promise.reject(error);
-    }
-}
-
-export { getAllUsers, getUserById, updateUser, deleteUser, getProfile };
+export { getAllUsers, getUserById, updateUser, deleteUser };

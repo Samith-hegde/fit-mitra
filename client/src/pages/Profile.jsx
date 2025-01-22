@@ -1,9 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import useAuth  from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -19,6 +20,7 @@ function Profile() {
                     <h4> Date of Birth: </h4> <p>{user.date_of_birth ? user.date_of_birth : ' '}</p>
                 </div>
             )}
+            <button onClick={() => navigate(-1)}>Go Back</button>
         </>
     )
 }
