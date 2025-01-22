@@ -25,9 +25,9 @@ const register = async (userData) => {
         email,
         bio,
         fitness_goals,  
-        date_of_birth, 
-        height,         
-        weight,               
+        date_of_birth: (new Date(date_of_birth)),
+        height: parseFloat(height),         
+        weight: parseFloat(weight),               
         },
     });
 

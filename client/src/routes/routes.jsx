@@ -1,5 +1,6 @@
 import App from '../App.jsx'
 import Login from '../pages/Login.jsx'
+import Register from '../pages/Register.jsx'
 import Dashboard from '../pages/Dashboard.jsx'
 import ProtectedRoute from './protectedRoute.jsx'
 
@@ -10,6 +11,7 @@ const routes = [
         children: [
             { index: true, element: <ProtectedRoute children={<Dashboard />}/> },
             { path: '/login', element: <Login /> },
+            { path: '/register', element: <Register /> }
         ]
     }
 ]
