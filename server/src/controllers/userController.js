@@ -2,7 +2,6 @@ const userQueries = require('../services/userService');
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
-  console.log('ID:', id);
   try {
     const user = await userQueries.findUserById(id);
     res.json(user);
@@ -41,9 +40,22 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getProfile = async (req, res) => {
+  console.log('User:', req.user);
+  /*const { id } = req.user;
+  console.log('User ID:', id);
+  try {
+    const user = await userQueries.findUserById(id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }*/
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   updateUser,
   deleteUser,
+  getProfile,
 };
