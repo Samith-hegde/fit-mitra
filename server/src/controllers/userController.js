@@ -20,10 +20,10 @@ const getAllUsers = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { id } = req.user;
+  const { userId } = req.user;
   try {
     console.log('Request Body:', req.body);
-    const updatedUser = await userQueries.updateExistingUser(id, req.body);
+    const updatedUser = await userQueries.updateExistingUser(userId, req.body);
     res.json(updatedUser);
   } catch (error) {
     res.status(500).json({ error: error.message });

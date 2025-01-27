@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAuth  from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,8 @@ function Profile() {
                     <h4> Date of Birth: </h4> <p>{user.date_of_birth ? user.date_of_birth : ' '}</p>
                 </div>
             )}
-            <button onClick={() => navigate(-1)}>Go Back</button>
+            <button onClick={() => navigate('/edit-profile')}>Edit Profile</button>
+            <button onClick={() => navigate('/dashboard')}>Go Back</button>
         </>
     )
 }

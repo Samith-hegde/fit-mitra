@@ -41,7 +41,12 @@ const findAllUsers = async () => {
 const updateExistingUser = async (id, userData) => {
   return await prisma.users.update({
     where: { id: parseInt(id) },
-    data: userData,
+    data: {
+      ...userData,
+      date_of_birth: new Date(userData.date_of_birth),
+      height: parseFloat(userData.height),
+      weight: parseFloat(userData.weight),
+    },
   });
 };
 
