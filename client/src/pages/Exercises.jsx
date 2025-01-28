@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllExercises, createExercise } from '../services/exerciseService';
+import { getAllExercises } from '../services/exerciseService';
 
 function Exercises() {
     const navigate = useNavigate();
@@ -56,9 +56,15 @@ function Exercises() {
             <ul>
                 {filteredExercises.map((exercise) => (
                     <li key={exercise.id}>
-                        <h3> Exercise: </h3> <h4>{exercise.name}</h4>
-                        <h4> Description: </h4> <p>{exercise.description}</p>
-                        <h4> Muscle Group: </h4> <p>{exercise.muscle_group}</p>
+                    <div>
+                        <strong>Exercise:</strong> {exercise.name}
+                    </div>
+                    <div>
+                        <strong>Description:</strong> {exercise.description}
+                    </div>
+                    <div>
+                        <strong>Muscle Group:</strong> {exercise.muscle_group}
+                    </div>
                     </li>
                 ))}
             </ul>
