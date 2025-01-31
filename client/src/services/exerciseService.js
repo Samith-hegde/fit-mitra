@@ -20,7 +20,8 @@ const createExercise = async (exercise) => {
 
 const updateExercise = async (exercise) => {
     try {
-        const response = await api.put('/exercises/updateExercise', exercise);
+        const id = exercise.id;
+        const response = await api.put(`/exercises/updateExercise/${id}`, exercise);
         return response.data;
     } catch (error) {
         return Promise.reject(error);

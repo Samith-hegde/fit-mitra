@@ -12,7 +12,7 @@ const progressRouter = require('./progressRouter');
 
 router.use('/auth', authRouter);
 router.use('/users', authenticateToken, userRouter);
-router.use('/workout', authenticateToken, workoutRouter);
+router.use('/workouts', authenticateToken, workoutRouter);
 router.use('/exercises', exercisesRouter);
 router.use('/social', authenticateToken, socialRouter);
 router.use('/friends', authenticateToken, friendsRouter);

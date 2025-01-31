@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllExercises } from '../services/exerciseService';
+import { getAllExercises, deleteExercise } from '../services/exerciseService';
 
 function Exercises() {
     const navigate = useNavigate();
@@ -42,6 +42,17 @@ function Exercises() {
         }
     };
 
+    const handleDeleteExercise = async (id) => {
+        try {
+            await deleteExercise(id);
+            const updatedExercises = exercises.filter((exercise) => exercise.id !== id);
+            setExercises(updatedExercises);
+            setFilteredExercises(updatedExercises);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <>
             <h1>Exercises</h1>
@@ -65,6 +76,8 @@ function Exercises() {
                     <div>
                         <strong>Muscle Group:</strong> {exercise.muscle_group}
                     </div>
+                    <button onClick={() => navigate('/exercises/create', { state: { exercise }})}>Edit Exercise</button>
+                    <button onClick={() => handleDeleteExercise(exercise.id)}>Delete Exercise</button>
                     </li>
                 ))}
             </ul>
