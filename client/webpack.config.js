@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.css$/, // Process CSS and TailwindCSS
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [ { loader: 'style-loader' },  { loader: 'css-loader' }, { loader: 'postcss-loader'}, ], exclude: /node_modules/ ,
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/, // Load images

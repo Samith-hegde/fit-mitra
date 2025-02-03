@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { AuthProvider } from './contexts/AuthContext'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import routes from './routes/routes'
+import './index.css'
 
 const Router = createBrowserRouter(routes)
 

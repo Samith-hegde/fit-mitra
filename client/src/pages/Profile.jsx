@@ -20,8 +20,8 @@ function Profile() {
                     <h4> Date of Birth: </h4> <p>{user.date_of_birth ? user.date_of_birth : ' '}</p>
                 </div>
             )}
-            <button onClick={() => navigate('/edit-profile')}>Edit Profile</button>
-            <button onClick={() => navigate('/dashboard')}>Go Back</button>
+            <button onClick={() => navigate('/profile/edit')}>Edit Profile</button>
+            <button onClick={() => navigate('/')}>Go Back</button>
         </>
     )
 }

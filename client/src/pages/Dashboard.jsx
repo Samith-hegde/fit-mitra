@@ -7,6 +7,8 @@ function Dashboard() {
         <>
             <h1>Dashboard</h1>
             <Link to="/profile">Profile</Link>
+            <br />
+            <Link to="/exercises">See All Exercises</Link>
         </>
     )
 }
