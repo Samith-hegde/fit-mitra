@@ -34,6 +34,7 @@ model workout {
   date       DateTime
   duration   Int
   notes      String?
+  status     WorkoutStatus
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   isTemplated Boolean @default(false)
@@ -108,4 +109,10 @@ enum PostType {
   Tips
   Workout 
   Progress
+}
+
+enum WorkoutStatus {
+  Completed
+  InProgress
+  Abandoned
 }
