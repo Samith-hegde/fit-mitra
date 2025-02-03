@@ -1,7 +1,19 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  content: [
+    './client/src/**/*.{js,ts,jsx,tsx}', // Update to point to the right folder
+    './client/public/index.html', // Example of your public folder
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#4A90E2',
+        secondary: '#50E3C2',
+        accent: '#9013FE',
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
 };
