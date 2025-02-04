@@ -11,9 +11,10 @@ const getWorkout = async (req, res) => {
 };
 
 const getAllWorkouts = async (req, res) => {
-  const user_id = req.user.user_id;
+  const { userId } = req.user;
+  console.log('User ID:', userId);
   try {
-    const workouts = await workoutQueries.findAllWorkoutsByUserId(user_id);
+    const workouts = await workoutQueries.findAllWorkoutsByUserId(userId);
     res.json(workouts);
   } catch (error) {
     res.status(500).json({ error: error.message });

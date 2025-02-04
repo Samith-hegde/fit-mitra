@@ -9,6 +9,8 @@ function Dashboard() {
             <Link to="/profile">Profile</Link>
             <br />
             <Link to="/exercises">See All Exercises</Link>
+            <br />
+            <Link to="/workouts">See Your Workouts</Link>
         </>
     )
 }
